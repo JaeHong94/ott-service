@@ -1,7 +1,12 @@
 package com.jaehong.ottservice.tmdb;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jaehong.ottservice.client.TmdbHttpClient;
+import com.jaehong.ottservice.tmdb.response.TmdbMovieNowPlaying;
+import com.jaehong.ottservice.tmdb.response.TmdbMovieNowPlayingResponse;
 import lombok.RequiredArgsConstructor;
+import movie.TmdbMovie;
 import movie.TmdbMoviePort;
 import movie.TmdbPageableMovies;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,8 +28,26 @@ public class TmdbMovieListHttpClient implements TmdbMoviePort {
         String url = nowPlayingUrl + "?language=ko-KR%page" + page;
         String request = tmdbHttpClient.request(url, HttpMethod.GET, CollectionUtils.toMultiValueMap(Map.of()), Map.of());
 
+        TmdbMovieNowPlayingResponse response;
+        try {
+            response = new ObjectMapper().readValue(request, TmdbMovieNowPlayingResponse.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
 
-
-        return null;
+        return new TmdbPageableMovies(
+                response.getResults().stream()
+                        .map(movie -> new TmdbMovie(
+                                movie.getTitle(),
+                                movie.getAdult(),
+                                movie.getGenreIds(),
+                                movie.getOverview(),
+                                movie.getReleaseDate()
+                                )
+                        )
+                        .toList(),
+                page,
+                response.getTotalPages() - page != 0
+        );
     }
 }
