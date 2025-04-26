@@ -3,8 +3,6 @@ package com.jaehong.ottservice.movie;
 import com.jaehong.ottservice.movie.response.MovieResponse;
 import com.jaehong.ottservice.movie.response.PageableMoviesResponse;
 import lombok.RequiredArgsConstructor;
-import movie.TmdbMoviePort;
-import movie.TmdbPageableMovies;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
