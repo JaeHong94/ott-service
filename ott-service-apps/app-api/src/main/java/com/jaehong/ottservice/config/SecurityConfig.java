@@ -1,5 +1,6 @@
 package com.jaehong.ottservice.config;
 
+import com.jaehong.ottservice.security.OttServiceUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,12 +21,16 @@ import java.util.Collections;
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+    private final OttServiceUserDetailsService ottServiceUserDetailsService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.httpBasic(AbstractHttpConfigurer::disable);
         httpSecurity.formLogin(AbstractHttpConfigurer::disable);
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
         httpSecurity.cors(cors -> cors.configurationSource(configurationSource()));
+
+        httpSecurity.userDetailsService(ottServiceUserDetailsService);
 
         httpSecurity.authorizeHttpRequests(auth ->
                 auth.anyRequest().authenticated());
