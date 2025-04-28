@@ -3,6 +3,7 @@ rootProject.name = "ott-service"
 include("ott-service-adapters")
 include("ott-service-adapters:adapter-http")
 include("ott-service-adapters:adapter-persistence")
+include("ott-service-adapters:adapter-redis")
 
 include("ott-service-apps")
 include("ott-service-apps:app-api")
