@@ -175,7 +175,7 @@ configureByLabels("querydsl") {
         annotationProcessor("jakarta.annotation:jakarta.annotation-api")
     }
 
-    val querydslDir = layout.buildDirectory.dir("generated/querydsl").get()
+    val querydslDir = "src/main/generated"
 
     tasks.withType<JavaCompile> {
         options.generatedSourceOutputDirectory.set(file(querydslDir))
@@ -183,15 +183,17 @@ configureByLabels("querydsl") {
 
     sourceSets {
         main {
-            java.srcDirs(querydslDir)
+            java {
+                srcDirs(querydslDir)
+            }
         }
     }
 
-    // clean 시에 QClass 디렉토리 삭제
     tasks.named("clean") {
         doLast {
             file(querydslDir).deleteRecursively()
         }
     }
+
 }
 
