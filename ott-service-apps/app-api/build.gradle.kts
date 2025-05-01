@@ -1,5 +1,6 @@
 dependencies {
     implementation(project(":ott-service-core:core-usecase"))
+    implementation(project(":ott-service-commons"))
 
     runtimeOnly(project(":ott-service-core:core-service"))
 

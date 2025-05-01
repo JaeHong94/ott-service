@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class MutableBaseEntity extends BaseEntity {
     @LastModifiedDate
-    @Column(name = "UPDATED_AT")
+    @Column(name = "MODIFIED_AT")
     private LocalDateTime updatedAt;
 
     @LastModifiedBy
-    @Column(name = "UPDATED_BY")
+    @Column(name = "MODIFIED_BY")
     private String updatedBy;
 }

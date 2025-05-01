@@ -1,5 +1,6 @@
 package com.jaehong.ottservice.user;
 
+import com.jaehong.ottservice.exception.UserException;
 import com.jaehong.ottservice.user.command.UserPortResponse;
 import com.jaehong.ottservice.user.command.UserResponse;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +17,12 @@ public class UserService implements FetchUserUseCase {
     public UserResponse findUserByEmail(String email) {
         Optional<UserPortResponse> byEmail = fetchUserPort.findByEmail(email);
         if (byEmail.isEmpty()) {
-            throw new RuntimeException();
+            throw new UserException.UserDoseNotExistException();
         }
 
         UserPortResponse userPortResponse = byEmail.get();
 
-        return new UserResponse().builder()
+        return UserResponse.builder()
                 .userId(userPortResponse.getUserId())
                 .userName(userPortResponse.getUserName())
                 .email(userPortResponse.getEmail())
