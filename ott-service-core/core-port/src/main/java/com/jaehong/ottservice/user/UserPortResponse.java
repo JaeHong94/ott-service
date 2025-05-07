@@ -1,4 +1,4 @@
-package com.jaehong.ottservice.user.command;
+package com.jaehong.ottservice.user;
 
 import lombok.Builder;
 import lombok.Getter;

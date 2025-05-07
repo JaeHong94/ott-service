@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Signup() {
-  const [username, setUsername] = useState('jaehong.min');
+  const [userName, setUserName] = useState('jaehong.min');
   const [email, setEmail] = useState('jaehong.min@kakaobank.com');
   const [password1, setPassword1] = useState('1234');
   const [password2, setPassword2] = useState('1234');
@@ -18,7 +18,7 @@ function Signup() {
     try {
       // /login API에 POST 요청
       const response = await axios.post('http://localhost:8080/api/v1/user/register', {
-        username,
+        userName,
         password: password1,
         email,
         phone
@@ -81,8 +81,8 @@ function Signup() {
               type="text"
               className="form-control"
               id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
               required
             />
           </div>
