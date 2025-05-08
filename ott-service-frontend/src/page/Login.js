@@ -5,7 +5,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Login({ setIsLoggedIn }) {
-  const [username, setUsername] = useState('danny.kim@kakaobank.com');
+  const [userName, setUserName] = useState('jaehong.min@kakaobank.com');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();  // 페이지 이동을 위한 useNavigate 훅 사용
@@ -14,8 +14,8 @@ function Login({ setIsLoggedIn }) {
     e.preventDefault();
     try {
       // /login API에 POST 요청
-      const response = await axios.post('http://localhost:8080/api/v1/auth/login', {
-        email: username,
+      const response = await axios.post('http://localhost:8080/api/v1/user/login', {
+        email: userName,
         password
       });
 
@@ -53,8 +53,8 @@ function Login({ setIsLoggedIn }) {
               type="text"
               className="form-control"
               id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
             />
           </div>
           <div className="mb-3">

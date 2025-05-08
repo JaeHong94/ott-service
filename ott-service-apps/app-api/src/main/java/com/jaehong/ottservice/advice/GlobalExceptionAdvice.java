@@ -1,6 +1,6 @@
 package com.jaehong.ottservice.advice;
 
-import com.jaehong.ottservice.controller.movie.OttServiceApiResponse;
+import com.jaehong.ottservice.controller.OttServiceApiResponse;
 import com.jaehong.ottservice.exception.ErrorCode;
 import com.jaehong.ottservice.exception.UserException;
 import lombok.extern.slf4j.Slf4j;
